@@ -6,8 +6,6 @@ GEM
       sinatra (>= 1.3.2)
     chunky_png (1.2.8)
     cinch (2.0.9)
-    cinch-identify (1.4.1)
-      cinch (~> 2.0)
     compass (0.12.2)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -51,7 +49,6 @@ PLATFORMS
 DEPENDENCIES
   async_sinatra
   cinch (~> 2.0.9)
-  cinch-identify (~> 1.4.1)
   compass
   eventmachine
   foreman

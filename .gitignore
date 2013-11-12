@@ -1,0 +1,7 @@
+.swp
+/public/*.css
+.sass-cache
+.DS_Store
+/fire_app_log.txt
+*.rdb
+/tmp

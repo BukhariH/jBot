@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Jbot - Logger | #<%= @channel %></title>
+    <link rel="stylesheet" type="text/css" href="/assets/screen.css">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ropa+Sans">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans+Mono">
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <style>
+.jbot { width: 320px; height: 50px; }
+@media(min-width: 500px) { .jbot { width: 468px; height: 60px; } }
+@media(min-width: 800px) { .jbot { width: 728px; height: 90px; } }
+</style>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <h1>Jbot - Logger</h1>
+      </br>
+          <div id="search">
+    <form action="/search/<%= @channel %>" method="GET">
+<fieldset class="clearfix">
+
+          <input type="search" name="search" value="Search" onBlur="if(this.value=='')this.value='Search'" onFocus="if(this.value=='Search')this.value='' "> <!-- JS because of IE support; better: placeholder="What are you looking for?" -->
+          <input type="submit" value="Search" class="button">
+
+        </fieldset>
+    </form>
+  </div>
+      </div>
+      <!-- Quick Nav -->
+      <div class="quick-nav">
+        <div class="nav_page-up" onclick="pageScrollTop(0);">⬆</div>
+        <div class="nav_page-down" onclick="pageScrollTop($(document).height());">⬇</div>
+      </div>
+      <div class="body">
+  <div class="channel">#<%= @channel %></div>
+        
+        <% given_date = Time.parse(@date) %>
+        <select id="date-picker" class="date">
+          <% if (Time.now - given_date > 86400 * 5) %>
+            <option value="<%= @date %>"><%= @date %></option>
+          <% end %>
+          <optgroup label="Today">
+            <option value="today" <%= "selected" if @date == Date.today.to_s %>><%= Date.today.to_s %></option>
+          </optgroup>
+          <optgroup label="Earlier logs">
+            <% (1.upto 29).map{|d| (Date.today - d).to_s }.each do |date| %>
+              <option value="<%= date %>" <%= "selected" if @date == date %>><%= date %></option>
+            <% end %>
+          </optgroup>
+        </select>
+        <div class="scroll_switch">AUTO⬇ </div>
+       
+        <div id="container">
+          <ul class="logs">
+            <% @msgs.each do |msg| %>
+              <% linked_msg = msg["msg"].gsub(/http[s]*:\/\/[^\s]+/, '<a href="\0" target="_blank" class="link">\0</a>') %>
+              <li>
+                <span class="time" id="<%= Time.at(msg["time"].to_f).strftime("%T") %>"><%= Time.at(msg["time"].to_f).strftime("%T") %></span>
+                <span class="nick"><a href="/nick/<%= msg["nick"] %>" class="nick"><%= msg["nick"] %></a></span>
+                <span class="msg wordwrap"><%= linked_msg %></span>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <!-- Monetize -->
+    <div style="text-align: center; margin: 5px 0;">
+        <ins class="adsbygoogle jbot"
+         style="display:inline-block"
+         data-ad-client="ca-pub-8525497640737370"
+         data-ad-slot="5462287015"></ins>
+      <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+    <!-- Footer -->
+    <div class="footer">
+            <p>Powered by Logbot 2013 | <a href="https://github.com/dannvix/Logbot">GitHub Repo</a> | Some extra love by Jesse</p>
+    </div>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script>var channel = "<%= @channel %>";</script>
+    <script src="/assets/applications.js"></script>
+    <% if @date == Date.today.to_s %>
+      <script>pollNewMsg();</script>
+    <% end %>
+  </body>
+</html>

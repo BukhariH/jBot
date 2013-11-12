@@ -1,0 +1,244 @@
+@import "compass"
+@import "compass/reset"
+@import "solarized"
+
+$row-color-odd: rgba(0,0,0,.33)
+$row-color-even: rgba(0,0,0,.15)
+
+@-webkit-keyframes blink
+  from
+    background-color: $yellow
+  to
+    background-color: transparent
+
+@keyframes blink
+  from
+    background-color: $yellow
+  to
+    background-color: transparent
+
+html *
+  // @include box-shadow(0 0 0 1px darken(white, 75%))
+  color-profile: sRGB
+  rendering-intent: auto
+
+body
+  background: $base02
+  color: $base00
+  font-family: "Helvetica", sans-serif
+  a
+    text-decoration: none
+
+.link 
+  color: $blue
+  text-decoration: none
+  &:hover
+    background: $blue
+    color: $base03
+
+.wrapper
+  width: 90%
+  margin: 0 auto
+
+
+.header
+  padding: 30px 0
+  text-align: center
+  h1
+    @include inline-block
+    font-size: 32pt
+    font-family: "Ropa Sans", sans-serif
+    color: $base02
+    font-weight: bold
+    background: $green
+    padding: 5px 20px
+    text-transform: uppercase
+
+
+.footer
+  padding: 40px 0 30px 0
+  font-family: "Ropa Sans", sans-serif
+  text-transform: uppercase
+  text-align: center
+
+
+.body
+  .channel, .date, .scroll_switch
+    color: $cyan 
+    font: 14pt/20px "Droid Sans Mono", monospace
+    @include inline-block
+    @include border-radius(5px)
+    cursor: pointer
+
+    &:hover
+      background-color: $base03
+  .channel
+    font-weight: bold
+    padding: 5px 10px
+  .date
+    width: 7.2em
+    height: 30px
+    background: transparent url('images/img_dropdown_violet.svg') no-repeat 6em 60%
+    @include background-size(10%)
+    color: $violet
+    letter-spacing: -2px
+    border: none
+    padding: 0 10px
+    outline: none
+    @include appearance(none)
+    &::after
+      content: '\25BE'
+
+  .scroll_switch
+    @include float-right
+    clear: both
+    padding: 5px 10px
+    color: darken($green, 5%)
+  .scroll_switch_off
+    color: darken($green, 15%)
+    text-decoration: line-through
+    
+  .logs
+    list-style-type: none
+    font-family: "Droid Sans Mono", monospace
+    margin: 0 10px
+    li
+      margin-top: 12px
+      line-height: 1.33
+
+      &.new-arrival
+        -webkit-animation: blink 500ms ease-out
+        animation: blink 500ms ease-out
+
+      .time, .nick
+        float: left
+      .time, .nick, .msg
+        display: block
+      .time
+        width: 70px
+        vertical-align: text-top
+        letter-spacing: -2px
+        color: $base00
+      .nick
+        width: 110px
+        color: $yellow
+        text-align: right
+        letter-spacing: -1px
+        margin-left: 5px
+      .msg
+        color: $base1
+        margin-left: 200px
+        .nick
+          width: auto
+          margin-left: 0px
+
+.wordwrap
+  -ms-word-break: break-all
+  word-break: break-all
+  //Non standard for webkit
+  word-break: break-word
+  -webkit-hyphens: auto
+  -moz-hyphens: auto
+  hyphens: auto
+
+
+// quick navigation
+.quick-nav
+  position: fixed
+  top: 45%
+  right: 3%
+  @include inline-block
+  text-align: center
+
+.nav_page-up,
+.nav_page-down
+  background-color: $base03
+  color: $base1
+  font-size: 14pt
+  padding: 5px
+  @include border-radius(5px)
+  &:hover
+    cursor: pointer
+    background-color: $base01
+    color: $base03
+
+.nav_page-down
+  margin-top: 15px
+
+
+// mobile layout
+@media only screen and (max-width : 568px)
+  .body .logs li
+    padding: 10px
+    &:nth-child(odd)
+      background: $row-color-odd
+    &:nth-child(even)
+      background: $row-color-even
+    .nick
+      width: auto
+    .msg
+      margin-left: 0
+      clear: left
+
+  .nav_page-up,
+  .nav_page-down
+    padding: 1px
+
+  // Custom 
+.clearfix
+  *zoom: 1
+  &:before
+    content: ""
+    display: table
+  &:after
+    content: ""
+    display: table
+    clear: both
+
+#search
+  background: #42454e
+  border-radius: 3px
+  display: inline-block
+  padding: 7px
+  input
+    float: left
+    &[type="search"], &[type="submit"]
+      border-radius: 3px
+      font-size: 12px
+    &[type="search"]
+      background: #fff
+      color: #42454e
+      min-width: 184px
+      padding: 6px 8px
+    &[type="submit"]
+      background: #1bba9a
+      color: #fff
+      font-weight: bold
+      margin-left: 7px
+      padding: 6px 10px
+      &:hover
+        background: #189e83
+    &[type="search"]
+      &::-webkit-input-placeholder, &:-moz-placeholder, &:-ms-input-placeholder
+        color: #42454e
+input
+  border: none
+  font-family: inherit
+  font-size: inherit
+  line-height: 1.5em
+  margin: 0
+  outline: none
+  padding: 0
+  -webkit-appearance: none
+  &[type="search"]
+    &::-webkit-search-cancel-button, &::-webkit-search-decoration
+      -webkit-appearance: none
+
+fieldset
+  border: 0
+  margin: 0
+  padding: 0
+
+.line-separator
+  height: 1px
+  border-bottom: 1px solid $green

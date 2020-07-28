@@ -18,7 +18,7 @@ GEM
     fssm (0.2.10)
     haml (4.0.3)
       tilt
-    json (1.8.0)
+    json (2.3.0)
     mini_portile (0.5.1)
     multi_json (1.8.0)
     nokogiri (1.6.0)

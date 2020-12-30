@@ -11,7 +11,7 @@ gem 'haml'
 gem 'sass'
 gem "redis", "~> 3.0.4"
 gem "cinch", "~> 2.0.9"
-gem "nokogiri", "~> 1.6.0"
+gem "nokogiri", "~> 1.10.10"
 gem 'json'
 gem "oj", "~> 2.1.4"
 gem "puma", "~> 2.6.0"
